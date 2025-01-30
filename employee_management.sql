@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 10, 2025 at 02:11 PM
+-- Generation Time: Jan 30, 2025 at 06:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -12,6 +12,20 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `employee_management`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees_tbl`
+--
 
 CREATE TABLE `employees_tbl` (
   `id` int(11) NOT NULL,
@@ -37,8 +51,13 @@ CREATE TABLE `employees_tbl` (
   `emp_ifsc_code` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `employees_tbl`
+--
+
 INSERT INTO `employees_tbl` (`id`, `emp_id`, `emp_fullname`, `emp_fathername`, `emp_address`, `emp_phone`, `emp_email`, `emp_aadhar_card`, `emp_pan_card`, `emp_photo`, `emp_date_of_birth`, `emp_gender`, `emp_department`, `emp_designation`, `emp_date_of_joining`, `emp_office_exit_date`, `emp_basic_salary`, `emp_acc_holder_name`, `emp_acc_num`, `emp_bank_detail`, `emp_ifsc_code`) VALUES
-(1, 25, 'Ashirvad', 'Hello Ji', '1281 Near Mission Hospital Main road Faridpur Bareilly', 7817940937, 'ashirvad2912@gmail.com', 913399343558, 'OHUPS6680H', 'large-MDD B (4).jpg', '2025-01-15', 'male', 'Development', 'Web Developer', '2025-01-15', '2025-01-15', 546546.00, 'Ashirvad Singh', '4564565675678567878', 'hdfc', '4564564545645');
+(5, 34, 'Ashirvad Singh TOMARffgfdsgdfgdfgrf', 'Hello Ji', '1281 Near Mission Hospital Main road Faridpur Bareilly', 7817940937, 'ashirvad2912@gmail.com', 913399343558, 'OHUPS6680H', 'large-LC-Images_Shoulder OA-2 (1).jpg', '2004-12-28', 'Male', '', 'Web Developer', '2025-01-13', '2025-01-16', 5454.00, '', '', '', ''),
+(9, 54, 'Ashirvad', 'Singh', '1281 Near Mission Hospital Main road Faridpur Bareilly', 7817940938, 'ashirvad2912879@gmail.com', 913399343559, 'OHUPS6690H', 'Lupus GB-EN (2).jpg', '2004-12-29', 'female', 'Designer', 'Graphics Designer', '2025-01-22', NULL, 8900.00, 'Ashirvad Singhsw', '4564565675678567879', '', 'SBIN0051019');
 
 -- --------------------------------------------------------
 
@@ -60,7 +79,10 @@ CREATE TABLE `leave_requests` (
 --
 
 INSERT INTO `leave_requests` (`id`, `employee_id`, `start_date`, `end_date`, `reason`, `status`) VALUES
-(2, 4, '2024-12-31', '2025-01-09', 'Fever', 'rejected');
+(24, 54, '2025-01-22', '2025-01-29', 'Fever', 'pending'),
+(25, 54, '2025-01-22', '2025-01-29', 'Fever', 'pending'),
+(26, 34, '2025-01-29', '2025-02-26', 'fever', 'pending'),
+(27, 34, '2025-01-29', '2025-02-26', 'fever', 'pending');
 
 -- --------------------------------------------------------
 
@@ -81,18 +103,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (2, 'admin', 'admin123', 'admin'),
-(8, 'admin@gmail.com', '$2y$10$5MjE4us30zDm2/OVVLVC1.8PLnkQxa1d6maaA3NL008nudkIziTVG', 'employee'),
-(10, 'sakshama', 't%zrLePM9n50SF6rCPIap8t6', 'employee'),
-(11, 'ashirvad', '2912As#@', 'employee'),
-(13, 'adminerter', '$2y$10$Qk1BaY1uo8CIykoR0NTJV.POBADb7MgfMeP2PbKoCLJypoqr5pUd2', 'employee'),
-(15, 'adminerterewrtert', '$2y$10$PYNAkD47jY6IF3pgt17sJ.hCgvF/3aIIt7gPGD6oA0CayHL1W6lLG', 'employee'),
-(16, 'rahul', 'rahul123', 'employee'),
-(19, 'dfgr', 'rahul123', 'employee'),
-(20, 'dfgrfdg', 'dfgrfdg', 'employee'),
-(22, 'dfgrfdgdgf', 'dfgrfdgdgf', 'employee'),
-(23, 'dfgrfdgdgffd', 'dfgrfdgdgffd', 'employee'),
-(24, 'dssg', 'dssg', 'employee'),
-(25, 'dsf', 'dsf', 'employee');
+(34, 'sakshama', 't%zrLePM9n50SF6rCPIap8t6', 'employee'),
+(54, 'ram8790', '2912As#@', 'employee');
 
 --
 -- Indexes for dumped tables
@@ -102,7 +114,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 -- Indexes for table `employees_tbl`
 --
 ALTER TABLE `employees_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `emp_phone` (`emp_phone`),
+  ADD UNIQUE KEY `emp_aadhar_card` (`emp_aadhar_card`),
+  ADD UNIQUE KEY `emp_email` (`emp_email`),
+  ADD UNIQUE KEY `emp_pan_card` (`emp_pan_card`),
+  ADD UNIQUE KEY `emp_acc_num` (`emp_acc_num`);
 
 --
 -- Indexes for table `leave_requests`
@@ -126,29 +143,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employees_tbl`
 --
 ALTER TABLE `employees_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `leave_requests`
 --
 ALTER TABLE `leave_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `leave_requests`
---
-ALTER TABLE `leave_requests`
-  ADD CONSTRAINT `leave_requests_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
